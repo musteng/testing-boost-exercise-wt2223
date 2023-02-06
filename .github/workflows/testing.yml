@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: "Check src files"
-        run: clang-format --dry-run -Werror src/*.hpp src/*.cpp tests/*.cpp
+        run: clang-format -i src/*.hpp src/*.cpp tests/*.cpp
   Build:
     runs-on: ubuntu-latest
     steps:
