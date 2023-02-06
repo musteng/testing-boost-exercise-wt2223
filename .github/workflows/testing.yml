@@ -16,9 +16,7 @@ jobs:
       - name: "Create build directory"
         run: mkdir build
       - name: "Go to build directory"
-        run: cd build
-      - name: "cmake"
-        run: cmake ..
+        run: cd build & cmake ..
       - name: "Build"
         run: make -j4
       - name: "Upload build artifact"
