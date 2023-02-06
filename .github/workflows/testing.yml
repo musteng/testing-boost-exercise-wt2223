@@ -1,0 +1,44 @@
+name: SSE CI/CD
+
+on: [push]
+
+jobs:
+  Style:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Check src files"
+        run: clang-format --dry-run -Werror src/*.hpp src/*.cpp tests/*.hpp tests/*.cpp
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Create build directory"
+        run: mkdir build
+      - name: "Go to build directory"
+        run: cd build
+      - name: "cmake"
+        run: cmake ..
+      - name: "Build"
+        run: make -j4
+      - name: "Upload build artifact"
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-build
+          path: build
+          retention-days: 1
+  Test:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Download the build artifact"
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact-build
+      - name: "Go to build folder"
+        run: cd build
+      - name: "Run Tests"
+        run: ctest
+            
+            
