@@ -23,13 +23,14 @@ jobs:
         working-directory: ./build
         run: cmake ..
       - name: "Build"
+        working-directory: ./build
         run: make -j4
       - name: "Upload build artifact"
         uses: actions/upload-artifact@v2
         with:
           name: artifact-build
-          path: build
-          retention-days: 2
+          path: ./build
+          retention-days: 1
   Test:
     needs: Build
     runs-on: ubuntu-latest
