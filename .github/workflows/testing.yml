@@ -38,6 +38,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: "Get dependencies"
+        run: sudo apt install libeigen3-dev libyaml-cpp-dev libboost-all-dev
       - name: "Download the build artifact"
         uses: actions/download-artifact@v2
         with:
