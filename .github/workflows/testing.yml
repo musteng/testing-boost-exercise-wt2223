@@ -25,12 +25,14 @@ jobs:
       - name: "Build"
         working-directory: ./build
         run: make -j4
+      - name: "Archive build"
+        run: tar -cvf build.tar ./build
       - name: "Upload build artifact"
         uses: actions/upload-artifact@v2
         with:
           name: artifact-build
-          path: ./build
-          retention-days: 1
+          path: build.tar
+          retention-days: 7
   Test:
     needs: Build
     runs-on: ubuntu-latest
@@ -40,6 +42,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: artifact-build
+      - name: "Unarchive build"
+        run: tar -xvf build.tar
       - name: "Run Tests"
         working-directory: build
         run: ctest
