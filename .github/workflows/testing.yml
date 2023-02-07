@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: "Get dependencies"
-        run: sudo apt install libeigen3-dev libyaml-cpp-dev
+        run: sudo apt install libeigen3-dev libyaml-cpp-dev boost
       - name: "Create build directory"
         run: mkdir build
       - name: "Create build environment"
