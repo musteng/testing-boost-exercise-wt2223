@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: "Get dependencies"
-        run: sudo apt install eigen -y
+        run: sudo apt install libeigen3-dev -y
       - name: "Create build directory"
         run: mkdir build
       - name: "Create build environment"
