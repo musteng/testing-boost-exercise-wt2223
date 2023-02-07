@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: "Install clang-format"
         run: sudo apt install clang-format -y
-      - name: "Check src files"
+      - name: "Check whether cpp and hpp files formatted correctly"
         run: clang-format --dry-run -Werror src/*.hpp src/*.cpp tests/*.cpp
   Build:
     runs-on: ubuntu-latest
