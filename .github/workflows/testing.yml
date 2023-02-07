@@ -19,6 +19,8 @@ jobs:
         run: mkdir build
       - name: "Go to build directory"
         run: cd build
+         - name: "pwd"
+          run: pwd
       - name: "pwd"
         run: pwd
       - name: "Create build environment"
