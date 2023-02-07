@@ -17,13 +17,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: "Create build directory"
         run: mkdir build
-      - name: "Go to build directory"
-        run: cd build
-         - name: "pwd"
-          run: pwd
-      - name: "pwd"
-        run: pwd
       - name: "Create build environment"
+        working-directory: ./build
         run: cmake ..
       - name: "Build"
         run: make -j4
