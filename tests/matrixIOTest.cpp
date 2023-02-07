@@ -24,15 +24,15 @@ BOOST_AUTO_TEST_CASE(matrixIOTests)
 {
   MatrixXd readMatrix = matrixIO::openData("../data/m3.csv", 3);
 
-  BOOST_TEST(expectedMatrix(0) == readMatrix(0));
-  BOOST_TEST(expectedMatrix(1) == readMatrix(1));
-  BOOST_TEST(expectedMatrix(2) == readMatrix(2));
-  BOOST_TEST(expectedMatrix(3) == readMatrix(3));
-  BOOST_TEST(expectedMatrix(4) == readMatrix(4));
-  BOOST_TEST(expectedMatrix(5) == readMatrix(5));
-  BOOST_TEST(expectedMatrix(6) == readMatrix(6));
-  BOOST_TEST(expectedMatrix(7) == readMatrix(7));
-  BOOST_TEST(expectedMatrix(8) == readMatrix(8));
+  BOOST_TEST(expectedMatrix(0, 0) == readMatrix(0, 0));
+  BOOST_TEST(expectedMatrix(0, 1) == readMatrix(0, 1));
+  BOOST_TEST(expectedMatrix(0, 2) == readMatrix(0, 2));
+  BOOST_TEST(expectedMatrix(1, 0) == readMatrix(1, 0));
+  BOOST_TEST(expectedMatrix(1, 1) == readMatrix(1, 1));
+  BOOST_TEST(expectedMatrix(1, 2) == readMatrix(1, 2));
+  BOOST_TEST(expectedMatrix(2, 0) == readMatrix(2, 0));
+  BOOST_TEST(expectedMatrix(2, 1) == readMatrix(2, 1));
+  BOOST_TEST(expectedMatrix(2, 2) == readMatrix(2, 2));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

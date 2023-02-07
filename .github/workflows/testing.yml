@@ -7,8 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: "Install clang-format"
+        run: sudo apt install clang-format -y
       - name: "Check src files"
-        run: clang-format -i src/*.hpp src/*.cpp tests/*.cpp
+        run: clang-format --dry-run src/*.hpp src/*.cpp tests/*.cpp
   Build:
     runs-on: ubuntu-latest
     steps:
