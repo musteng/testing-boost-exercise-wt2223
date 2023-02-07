@@ -1,0 +1,53 @@
+name: SSE CI/CD
+
+on: [push]
+
+jobs:
+  Style:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Install clang-format"
+        run: sudo apt install clang-format -y
+      - name: "Check whether cpp and hpp files formatted correctly"
+        run: clang-format --dry-run -Werror src/*.hpp src/*.cpp tests/*.cpp
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Get dependencies"
+        run: sudo apt install libeigen3-dev libyaml-cpp-dev libboost-all-dev
+      - name: "Create build directory"
+        run: mkdir build
+      - name: "Create build environment"
+        working-directory: ./build
+        run: cmake ..
+      - name: "Build"
+        working-directory: ./build
+        run: make -j4
+      - name: "Archive build"
+        run: tar -cvf build.tar ./build
+      - name: "Upload build artifact"
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifact-build
+          path: build.tar
+          retention-days: 7
+  Test:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Get dependencies"
+        run: sudo apt install libeigen3-dev libyaml-cpp-dev libboost-all-dev
+      - name: "Download the build artifact"
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact-build
+      - name: "Unarchive build"
+        run: tar -xvf build.tar
+      - name: "Run Tests"
+        working-directory: build
+        run: ctest
+            
+            
