@@ -22,7 +22,7 @@ jobs:
       - name: "pwd"
         run: pwd
       - name: "Create build environment"
-        run: cmake $(HOME)/testing-boost-exercise-wt2223
+        run: cmake ..
       - name: "Build"
         run: make -j4
       - name: "Upload build artifact"
