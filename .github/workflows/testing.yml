@@ -40,9 +40,8 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: artifact-build
-      - name: "Go to build folder"
-        run: cd build
       - name: "Run Tests"
+        working-directory: ./build
         run: ctest
             
             
